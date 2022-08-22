@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>risque ana</title>
+</head>
+<body>
+<table>
+	{% for a in act%}
+	<tr>
+		<td id="{{a.id}}_num" >{{forloop.counter}}</td>  
+		<td id="{{a.id}}_nom">{{a.nom}}</td>
+		<td>
+			<input type="text" list="{{a.id}}_vul_list" id="{{a.id}}_vul" onchange="updateSelection(this, '{{a.id}}_link')" />
+			<datalist id="{{a.id}}_vul_list">
+			{% for v in vul%}
+			<option value="{{v.nom}}">{{v.nom}}</option>
+			{% endfor %}
+			</datalist>
+		</td>
+		<td>
+		<!-- ici je veux passer la valeur sélectionnée de l'input dans -->
+		<!-- le tag url pour chaque itération -->
+		<a type="button" href="/playground/add_object/null_vul" id="{{a.id}}_link" name="{{a.id}}">ajouter</a>
+		</td>
+	</tr> 
+	{% endfor %}
+</table>
+<script>
+	function updateSelection(input, linkId) {
+		document.getElementById(linkId).href = "/playground/add_object/" + input.value
+	}
+</script>
+</body>
+</html>
